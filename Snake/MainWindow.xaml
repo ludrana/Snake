@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Snake"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="520" Width="450"
+        WindowStyle="None">
     <Grid>
-        <Button Content="weee" Click="Button_Click"></Button>
+        <StackPanel Orientation="Vertical">
+            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="50"> Snek </TextBlock>
+            <Button Content="weee" Click="Button_Click" Width="100"></Button>
+            <Button Click="Button_Click_1"> exit </Button>
+        </StackPanel>
+        
     </Grid>
 </Window>

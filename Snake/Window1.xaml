@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Snake"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        WindowStyle="None"
+        Title="Window1" Height="520" Width="450"
+        ContentRendered="Window_ContentRendered">
     <Grid>
-        <TextBlock Text="second" FontSize="50"></TextBlock>
+        <StackPanel Orientation="Vertical">
+            <Button Click="Button_Click"> close? </Button>
+            <Border BorderBrush="Black" BorderThickness="5">
+                <!-- might need to change size/clipping later -->
+                <Canvas Name="GameArea" ClipToBounds="True" Width="400" Height="400">
+                    
+                </Canvas>
+            </Border>
+        </StackPanel>
     </Grid>
 </Window>
