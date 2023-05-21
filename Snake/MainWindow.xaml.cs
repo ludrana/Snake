@@ -28,16 +28,16 @@ namespace Snake
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // TODO : better transition
-            //        please stop teleporting
             Window1 mainWindow = new Window1();
             Visibility = Visibility.Hidden;
+            mainWindow.Top = Top;
+            mainWindow.Left = Left;
             mainWindow.Show();
-
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
         }
     }
 }

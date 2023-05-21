@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Title="Window1" Height="520" Width="450"
-        ContentRendered="Window_ContentRendered">
+        ContentRendered="Window_ContentRendered" KeyUp="Window_KeyUp">
     <Grid>
         <StackPanel Orientation="Vertical">
             <Button Click="Button_Click"> close? </Button>
