@@ -9,16 +9,32 @@
 
   <ItemGroup>
     <None Remove="res\apple.png" />
+    <None Remove="res\apple_sound.mp3" />
     <None Remove="res\arrows.png" />
     <None Remove="res\back.jpg" />
+    <None Remove="res\bonk.mp3" />
     <None Remove="res\cup.png" />
     <None Remove="res\pear.png" />
     <None Remove="res\snek.png" />
     <None Remove="res\snek_ded.png" />
     <None Remove="res\snek_head.png" />
     <None Remove="res\snek_red.png" />
+    <None Remove="res\SugarHaze.m4a" />
+    <None Remove="res\SugarHaze.mp3" />
     <None Remove="res\tail.png" />
     <None Remove="res\wasd.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="res\apple_sound.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="res\bonk.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="res\SugarHaze.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

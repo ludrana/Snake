@@ -36,6 +36,8 @@ namespace Snake
         private bool gameStart = false;
         private Random rnd = new Random();
         private Random rand = new Random();
+        private MediaPlayer _mpCurSound;
+        private MediaPlayer _mpSound2;
 
         private static Color body = (Color)ColorConverter.ConvertFromString("#00FF23");
         private Brush snakeBodyBrush = new SolidColorBrush(body);
@@ -55,6 +57,10 @@ namespace Snake
             gameTickTimer.Tick += GameTickTimer_Tick;
             LoadHighscoreList();
             UpdateGameStatus();
+            _mpCurSound = new MediaPlayer();
+            _mpCurSound.Open(new Uri(@"res/apple_sound.mp3", UriKind.Relative));
+            _mpSound2 = new MediaPlayer();
+            _mpSound2.Open(new Uri(@"res/bonk.mp3", UriKind.Relative));
         }
 
         private void GameTickTimer_Tick(object sender, EventArgs e)
@@ -430,6 +436,8 @@ namespace Snake
         {
             snakeLength++;
             currentScore++;
+            _mpCurSound.Position = TimeSpan.Zero;
+            _mpCurSound.Play();
             int timerInterval = Math.Max(SnakeSpeedThreshold, (int)gameTickTimer.Interval.TotalMilliseconds - (currentScore * 2));
             gameTickTimer.Interval = TimeSpan.FromMilliseconds(timerInterval);
             var images = GameArea.Children.OfType<Image>().ToList();
@@ -459,6 +467,8 @@ namespace Snake
             var snekHeadRot = Rotate(snekHead2, snakeDirection);
             ImageBrush head = new ImageBrush(snekHeadRot);
             (snakeParts[snakeParts.Count - 2].UiElement as Rectangle).Fill = head;
+            _mpSound2.Position = TimeSpan.Zero;
+            _mpSound2.Play();
             Tutorial.Visibility = Visibility.Visible;
             bool isNewHighscore = false;
             if (currentScore > 0)

@@ -20,9 +20,13 @@ namespace Snake
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MediaPlayer _mpBgr;
+        private bool isPlaying = true;
         public MainWindow()
         {
             InitializeComponent();
+            _mpBgr = new MediaPlayer();
+            PlayBG();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,7 +47,42 @@ namespace Snake
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            try
+            {
+                DragMove();
+            }
+            catch { }
+        }
+
+        private void PlayBG()
+        {
+            _mpBgr.Open(new Uri(@"res/SugarHaze.mp3", UriKind.Relative));
+            _mpBgr.Play();
+            _mpBgr.MediaEnded += new EventHandler(BGEnded);
+        }
+        private void BGEnded(object sender, EventArgs e)
+        {
+            _mpBgr.Position = TimeSpan.Zero;
+            _mpBgr.Play();
+        }
+
+        private void StopBG()
+        {
+            _mpBgr.Stop();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (isPlaying)
+            {
+                StopBG();
+                isPlaying = false;
+            }
+            else
+            {
+                PlayBG();
+                isPlaying= true;
+            }
         }
     }
 }
