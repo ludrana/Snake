@@ -117,14 +117,36 @@ namespace Snake
                     doneDrawingBackground = true;
             }
         }
+        private BitmapImage Rotate(BitmapImage image)
+        {
+            var biRotated = new BitmapImage();
+            biRotated.BeginInit();
+            biRotated.UriSource = image.UriSource;
+            switch (snakeDirection)
+            {
+                case SnakeDirection.Left:
+                    biRotated.Rotation = Rotation.Rotate270;
+                    break;
+                case SnakeDirection.Right:
+                    biRotated.Rotation = Rotation.Rotate90;
+                    break;
+                case SnakeDirection.Down:
+                    biRotated.Rotation = Rotation.Rotate180;
+                    break;
+            }
+            biRotated.EndInit();
+
+            return biRotated;
+        }
 
         private void DrawSnake()
         {
-            ImageBrush head = new ImageBrush(snekHead);
+            var snekHeadRot = Rotate(snekHead);
+            ImageBrush head = new ImageBrush(snekHeadRot);
+            
 
             while (snakeParts.Count >= snakeLength)
             {
-
                 GameArea.Children.Remove(snakeParts[0].UiElement);
                 snakeParts.RemoveAt(0);
             }
