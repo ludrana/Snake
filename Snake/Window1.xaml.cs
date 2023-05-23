@@ -37,15 +37,13 @@ namespace Snake
         private Random rnd = new Random();
         private Random rand = new Random();
 
-        private SolidColorBrush snakeBodyBrush = Brushes.Green;
-        //private SolidColorBrush snakeHeadBrush = Brushes.YellowGreen;
+        private static Color body = (Color)ColorConverter.ConvertFromString("#00FF23");
+        private Brush snakeBodyBrush = new SolidColorBrush(body);
         private BitmapImage snekHead = new BitmapImage(new Uri("pack://application:,,,/res/snek_head.png"));
-        public ImageBrush snakeHeadBrush3 = new ImageBrush
-        {
-            ImageSource = new BitmapImage(new Uri("res/snek_head.png", UriKind.Relative))
-        };
-        private ImageBrush snakeTailBrush = new();
-        
+        private BitmapImage snekHead1 = new BitmapImage(new Uri("pack://application:,,,/res/snek_red.png"));
+        private BitmapImage snekHead2 = new BitmapImage(new Uri("pack://application:,,,/res/snek_ded.png"));
+        private BitmapImage snekTail = new BitmapImage(new Uri("pack://application:,,,/res/tail.png"));
+     
         private List<SnakePart> snakeParts = new List<SnakePart>();
         public enum SnakeDirection { Left, Right, Up, Down };
         private SnakeDirection snakeDirection = SnakeDirection.Right;
@@ -117,12 +115,32 @@ namespace Snake
                     doneDrawingBackground = true;
             }
         }
-        private BitmapImage Rotate(BitmapImage image)
+        private SnakeDirection GetTailDirection(SnakePart prev, SnakePart tail)
+        {
+            if (prev.Position.X < tail.Position.X)
+            {
+                return SnakeDirection.Right;
+            }
+            if (prev.Position.X > tail.Position.X)
+            {
+                return SnakeDirection.Left;
+            }
+            if (prev.Position.Y < tail.Position.Y)
+            {
+                return SnakeDirection.Down;
+            }
+            if (prev.Position.Y > tail.Position.Y)
+            {
+                return SnakeDirection.Up;
+            }
+            return SnakeDirection.Up;
+        }
+        private BitmapImage Rotate(BitmapImage image, SnakeDirection direction)
         {
             var biRotated = new BitmapImage();
             biRotated.BeginInit();
             biRotated.UriSource = image.UriSource;
-            switch (snakeDirection)
+            switch (direction)
             {
                 case SnakeDirection.Left:
                     biRotated.Rotation = Rotation.Rotate270;
@@ -141,18 +159,27 @@ namespace Snake
 
         private void DrawSnake()
         {
-            var snekHeadRot = Rotate(snekHead);
-            ImageBrush head = new ImageBrush(snekHeadRot);
-            
-
             while (snakeParts.Count >= snakeLength)
             {
                 GameArea.Children.Remove(snakeParts[0].UiElement);
                 snakeParts.RemoveAt(0);
+                snakeParts[0].IsTail = true;
+            }
+            var snekHeadRot = Rotate(snekHead, snakeDirection);
+            if (tickNumber % 7 == 0 | (tickNumber + 1) % 7 == 0)
+            {
+                snekHeadRot = Rotate(snekHead1, snakeDirection);
+            }
+            ImageBrush head = new ImageBrush(snekHeadRot);
+            ImageBrush tail = new ImageBrush();
+            if (snakeParts.Count >= SnakeStartLength - 1)
+            {
+                var snekTailRot = Rotate(snekTail, GetTailDirection(snakeParts[1], snakeParts[0]));
+                tail.ImageSource = snekTailRot;
             }
             foreach (SnakePart snakePart in snakeParts)
             {
-                if (snakePart.UiElement != null && !snakePart.IsHead)
+                if (snakePart.UiElement != null && !snakePart.IsHead && !snakePart.IsTail)
                 {
                     (snakePart.UiElement as Rectangle).Fill = snakeBodyBrush;
                 }
@@ -160,12 +187,17 @@ namespace Snake
                 {
                     (snakePart.UiElement as Rectangle).Fill = head;
                 }
+                else if (snakePart.UiElement != null && snakePart.IsTail)
+                {
+                    (snakePart.UiElement as Rectangle).Fill = tail;
+                }
                 if (snakePart.UiElement == null)
                 {
                     snakePart.UiElement = new Rectangle()
                     {
                         Width = SnakeSquareSize,
                         Height = SnakeSquareSize,
+                        
                         Fill = (snakePart.IsHead ? head : snakeBodyBrush)
                     };
                     GameArea.Children.Add(snakePart.UiElement);
@@ -217,6 +249,7 @@ namespace Snake
             DoCollisionCheck();
             if (gameStart)
             {
+                tickNumber++;
                 DrawSnake();
             }
             
@@ -280,7 +313,7 @@ namespace Snake
                 Width = SnakeSquareSize,
                 Height = SnakeSquareSize
             };
-            if (rand.Next() % 2 == 0)
+            if (rand.Next() % 3 == 0)
             {
                 snakeFood.Source = new BitmapImage(new Uri("res/pear.png", UriKind.Relative));
             }
@@ -423,6 +456,9 @@ namespace Snake
         }
         private void EndGame()
         {
+            var snekHeadRot = Rotate(snekHead2, snakeDirection);
+            ImageBrush head = new ImageBrush(snekHeadRot);
+            (snakeParts[snakeParts.Count - 2].UiElement as Rectangle).Fill = head;
             Tutorial.Visibility = Visibility.Visible;
             bool isNewHighscore = false;
             if (currentScore > 0)

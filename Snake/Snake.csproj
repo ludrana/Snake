@@ -17,6 +17,7 @@
     <None Remove="res\snek_ded.png" />
     <None Remove="res\snek_head.png" />
     <None Remove="res\snek_red.png" />
+    <None Remove="res\tail.png" />
     <None Remove="res\wasd.png" />
   </ItemGroup>
 
@@ -30,6 +31,7 @@
     <Resource Include="res\snek_ded.png" />
     <Resource Include="res\snek_head.png" />
     <Resource Include="res\snek_red.png" />
+    <Resource Include="res\tail.png" />
     <Resource Include="res\wasd.png" />
   </ItemGroup>
 
