@@ -7,4 +7,30 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="res\apple.png" />
+    <None Remove="res\arrows.png" />
+    <None Remove="res\back.jpg" />
+    <None Remove="res\cup.png" />
+    <None Remove="res\pear.png" />
+    <None Remove="res\snek.png" />
+    <None Remove="res\snek_ded.png" />
+    <None Remove="res\snek_head.png" />
+    <None Remove="res\snek_red.png" />
+    <None Remove="res\wasd.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="res\apple.png" />
+    <Resource Include="res\arrows.png" />
+    <Resource Include="res\back.jpg" />
+    <Resource Include="res\cup.png" />
+    <Resource Include="res\pear.png" />
+    <Resource Include="res\snek.png" />
+    <Resource Include="res\snek_ded.png" />
+    <Resource Include="res\snek_head.png" />
+    <Resource Include="res\snek_red.png" />
+    <Resource Include="res\wasd.png" />
+  </ItemGroup>
+
 </Project>

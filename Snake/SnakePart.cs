@@ -12,5 +12,6 @@ namespace Snake
         public UIElement UiElement { get; set; }
         public Point Position { get; set; }
         public bool IsHead { get; set; }
+        public bool IsTail { get; set; }
     }
 }

@@ -29,15 +29,21 @@ namespace Snake
         {
             // TODO : better transition
             Window1 mainWindow = new Window1();
-            Visibility = Visibility.Hidden;
+            //ShowInTaskbar = false;
             mainWindow.Top = Top;
             mainWindow.Left = Left;
             mainWindow.Show();
+            Visibility = Visibility.Hidden;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
     }
 }
