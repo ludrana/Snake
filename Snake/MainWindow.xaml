@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Snake"
         mc:Ignorable="d" ResizeMode="NoResize" MouseDown="Window_MouseDown"
-        Title="MainWindow" Height="520" Width="450"
+        Title="Snek" Height="580" Width="450" Icon="/Snek_icon.ico"
         WindowStyle="None">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="res/back.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <StackPanel Orientation="Vertical">
-            <TextBlock FontSize="40" HorizontalAlignment="Center" Margin="50"> Snek </TextBlock>
+            <Image Source="res/Title.png" HorizontalAlignment="Center" Margin="50">  </Image>
             <Button Content="weee" Click="Button_Click" Width="100"></Button>
             <Button Content="bgm" Click="Button_Click_2"></Button>
             <Button Click="Button_Click_1"> exit </Button>

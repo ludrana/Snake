@@ -84,5 +84,10 @@ namespace Snake
                 isPlaying= true;
             }
         }
+
+        private void Button_Click_3()
+        {
+
+        }
     }
 }

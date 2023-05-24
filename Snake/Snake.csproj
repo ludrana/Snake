@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>res\Snek_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +15,7 @@
     <None Remove="res\back.jpg" />
     <None Remove="res\bonk.mp3" />
     <None Remove="res\cup.png" />
+    <None Remove="res\esc.png" />
     <None Remove="res\pear.png" />
     <None Remove="res\snek.png" />
     <None Remove="res\snek_ded.png" />
@@ -22,7 +24,13 @@
     <None Remove="res\SugarHaze.m4a" />
     <None Remove="res\SugarHaze.mp3" />
     <None Remove="res\tail.png" />
+    <None Remove="res\Title.png" />
     <None Remove="res\wasd.png" />
+    <None Remove="Snek_icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="res\Snek_icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,13 +50,16 @@
     <Resource Include="res\arrows.png" />
     <Resource Include="res\back.jpg" />
     <Resource Include="res\cup.png" />
+    <Resource Include="res\esc.png" />
     <Resource Include="res\pear.png" />
     <Resource Include="res\snek.png" />
     <Resource Include="res\snek_ded.png" />
     <Resource Include="res\snek_head.png" />
     <Resource Include="res\snek_red.png" />
     <Resource Include="res\tail.png" />
+    <Resource Include="res\Title.png" />
     <Resource Include="res\wasd.png" />
+    <Resource Include="Snek_icon.ico" />
   </ItemGroup>
 
 </Project>

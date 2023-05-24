@@ -8,8 +8,8 @@
         mc:Ignorable="d" x:Name="gameWindow"
         WindowStyle="None" ResizeMode="NoResize"
         MouseDown="Window_MouseDown"
-        Title="Window1" Height="550" Width="450" 
-        ContentRendered="Window_ContentRendered" KeyUp="Window_KeyUp">
+        Title="Snek" Height="580" Width="450"
+        ContentRendered="Window_ContentRendered" KeyUp="Window_KeyUp" Icon="/Snek_icon.ico">
     <Window.Background>
         <ImageBrush ImageSource="res/back.jpg"></ImageBrush>
     </Window.Background>
@@ -28,64 +28,69 @@
                     <DockPanel>
                         <WrapPanel Orientation="Horizontal" DockPanel.Dock="Left">
                             <Image Source="res/apple.png" Width="30" Margin="10"></Image>
-                            <TextBlock Name="statusScore" Margin="10" VerticalAlignment="Center">0</TextBlock>
+                            <TextBlock Name="statusScore" Margin="10" VerticalAlignment="Center" Foreground=" #5a480b " FontSize="24" FontWeight="Bold" FontFamily="Comic Sans MS">0</TextBlock>
                         </WrapPanel>
                         <WrapPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
                             <Image Source="res/cup.png" Width="30" Margin="10"></Image>
-                            <TextBlock VerticalAlignment="Center" Name="statusSpeed" Margin="10">0</TextBlock>
+                            <TextBlock VerticalAlignment="Center" Name="statusSpeed" Margin="10" Foreground=" #5a480b " FontSize="24" FontWeight="Bold" FontFamily="Comic Sans MS">0</TextBlock>
                         </WrapPanel>
                     </DockPanel>
-                    <StackPanel Orientation="Horizontal" Name="Tutorial" HorizontalAlignment="Center">
-                        <TextBlock VerticalAlignment="Center" FontSize="22" FontFamily="Comic Sans MS">Press</TextBlock>
-                        <Image Source="res/arrows.png" Width="80" Height="60"></Image>
-                        <TextBlock VerticalAlignment="Center" FontSize="22" FontFamily="Comic Sans MS"> or</TextBlock>
-                        <Image Source="res/wasd.png"  Width="80" Height="60"></Image>
-                        <TextBlock VerticalAlignment="Center" FontSize="22" FontFamily="Comic Sans MS"> to move</TextBlock>
+                    <StackPanel Orientation="Vertical" Name="Tutorial" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock VerticalAlignment="Center" FontSize="22" Foreground=" #5a480b " FontFamily="Comic Sans MS">Press</TextBlock>
+                            <Image Source="res/arrows.png" Width="80" Height="60"></Image>
+                            <TextBlock VerticalAlignment="Center" FontSize="22" Foreground=" #5a480b " FontFamily="Comic Sans MS"> or</TextBlock>
+                            <Image Source="res/wasd.png"  Width="80" Height="60"></Image>
+                            <TextBlock VerticalAlignment="Center" FontSize="22" Foreground=" #5a480b " FontFamily="Comic Sans MS"> to move</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock VerticalAlignment="Center" Foreground=" #5a480b " FontSize="22" FontFamily="Comic Sans MS">Press  </TextBlock>
+                            <Image Source="res/esc.png" Width="30" Height="30" Margin="10"></Image>
+                            <TextBlock VerticalAlignment="Center" Foreground=" #5a480b " FontSize="22" FontFamily="Comic Sans MS">  to exit</TextBlock>
+                        </StackPanel>
                     </StackPanel>
-
+                    
                 </StackPanel>
 
 
             </Grid>
-            <Border BorderBrush="Black" BorderThickness="5" Width="410" Height="410" VerticalAlignment="Bottom" Margin="5">
+            <Border BorderBrush=" #057317 " BorderThickness="3" Width="406" Height="406" VerticalAlignment="Bottom" Margin="5">
                 <Canvas Name="GameArea" HorizontalAlignment="Center" Width="400" Height="400">
-                    <Border BorderBrush="Silver" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrHighscoreList" Panel.ZIndex="1" Visibility="Collapsed">
-                        <StackPanel Orientation="Vertical" Background="AliceBlue">
-                            <Border BorderThickness="0,0,0,2" BorderBrush="Silver" Margin="0,10">
-                                <TextBlock HorizontalAlignment="Center" FontSize="34" FontWeight="Bold">High Score List</TextBlock>
+                    <Border BorderBrush=" #79ffce" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrHighscoreList" Panel.ZIndex="1" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical" Background="#e7ffeb">
+                            <Border BorderThickness="0,0,0,2" BorderBrush=" #79ffce" Margin="0,10">
+                                <TextBlock HorizontalAlignment="Center" FontSize="34" FontWeight="Bold" FontFamily="Comic Sans MS" Foreground="#066900 ">High Score List</TextBlock>
                             </Border>
                             <ItemsControl ItemsSource="{Binding Source={StaticResource HighScoreListViewSource}}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <DockPanel Margin="5">
-                                            <TextBlock Text="{Binding PlayerName}" DockPanel.Dock="Left" FontSize="20"></TextBlock>
-                                            <TextBlock Text="{Binding Score}" DockPanel.Dock="Right" FontSize="20" HorizontalAlignment="Right"></TextBlock>
+                                            <TextBlock Text="{Binding PlayerName}" DockPanel.Dock="Left" FontSize="18" Foreground="#243020" FontFamily="Comic Sans MS"></TextBlock>
+                                            <TextBlock Text="{Binding Score}" DockPanel.Dock="Right" FontSize="18" Foreground="#243020" HorizontalAlignment="Right" FontFamily="Comic Sans MS"></TextBlock>
                                         </DockPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <Button Click="CloseHighscoreList" Width="Auto" Height="Auto"> Close </Button>
-                            <Button Click="Button_Click" Width="Auto" Height="Auto" >Exit</Button>
+                            <Button Click="CloseHighscoreList" Width="Auto" Height="Auto" FontFamily="Comic Sans MS">Close</Button>
                         </StackPanel>
                     </Border>
-                    <Border BorderBrush="Silver" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrNewHighscore" Panel.ZIndex="1" Visibility="Collapsed">
-                        <StackPanel Orientation="Vertical" Background="AliceBlue">
-                            <TextBlock HorizontalAlignment="Center" FontSize="34" FontWeight="Bold" Margin="20">New Highscore!</TextBlock>
-                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="16">  
+                    <Border BorderBrush=" #79ffce" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrNewHighscore" Panel.ZIndex="1" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical" Background="#e7ffeb">
+                            <TextBlock HorizontalAlignment="Center" FontSize="34" FontWeight="Bold" Margin="20" FontFamily="Comic Sans MS" Foreground="#066900">New Highscore!</TextBlock>
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="16" FontFamily="Comic Sans MS" Foreground="#243020">  
         Congratulations - you made it into the Snek highscore list! Please enter your name below...
                             </TextBlock>
-                            <TextBox Name="txtPlayerName" FontSize="28" FontWeight="Bold" MaxLength="8" Margin="20" HorizontalContentAlignment="Center"></TextBox>
-                            <Button Name="btnAddToHighscoreList" FontSize="16" HorizontalAlignment="Center" Click="BtnAddToHighscoreList_Click" Padding="10,5">Add to highscore list</Button>
+                            <TextBox Name="txtPlayerName" FontSize="28" FontWeight="Bold" MaxLength="12" Margin="20" HorizontalContentAlignment="Center" FontFamily="Comic Sans MS" Foreground="#243020"></TextBox>
+                            <Button Name="btnAddToHighscoreList" FontSize="16" HorizontalAlignment="Center" Click="BtnAddToHighscoreList_Click" Padding="10,5" FontFamily="Comic Sans MS">Add to highscore list</Button>
                         </StackPanel>
                     </Border>
-                    <Border BorderBrush="Silver" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrEndOfGame" Panel.ZIndex="1" Visibility="Collapsed">
-                        <StackPanel Orientation="Vertical" Background="AliceBlue">
-                            <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" Margin="0,20,0,0">Oh no!</TextBlock>
-                            <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="Bold">...you died!</TextBlock>
-                            <TextBlock Margin="20" TextAlignment="Center" FontSize="16">Your score:</TextBlock>
-                            <TextBlock Name="tbFinalScore" TextAlignment="Center" FontSize="48" FontWeight="Bold" Foreground="Maroon">0</TextBlock>
-                            <Button Click="CloseEndScreen" Width="Auto" Height="Auto">Close</Button>
-                            <Button Click="Button_Click" Width="Auto" Height="Auto" >Exit</Button>
+                    <Border BorderBrush=" #79ffce" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrEndOfGame" Panel.ZIndex="1" Visibility="Visible">
+                        <StackPanel Orientation="Vertical" Background="#e7ffeb">
+                            <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontFamily="Comic Sans MS" Margin="0,20,0,0">Oh no!</TextBlock>
+                            <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" FontFamily="Comic Sans MS">...you died!</TextBlock>
+                            <TextBlock Margin="20" TextAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#243020">Your score:</TextBlock>
+                            <TextBlock Name="tbFinalScore" TextAlignment="Center" FontSize="48" FontWeight="Bold" FontFamily="Comic Sans MS" Foreground="Maroon">0</TextBlock>
+                            <Button Click="CloseEndScreen" Width="Auto" Height="Auto" FontFamily="Comic Sans MS">Close</Button>
                         </StackPanel>
                     </Border>
                 </Canvas>

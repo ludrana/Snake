@@ -74,8 +74,6 @@ namespace Snake
             main.Top = Top;
             main.Left = Left;
             main.Visibility = Visibility.Visible;
-            Visibility = Visibility.Hidden;
-            ShowInTaskbar = false;
             Close();
         }
 
@@ -436,8 +434,11 @@ namespace Snake
         {
             snakeLength++;
             currentScore++;
-            _mpCurSound.Position = TimeSpan.Zero;
-            _mpCurSound.Play();
+            if (Sfx.sfxOn)
+            {
+                _mpCurSound.Position = TimeSpan.Zero;
+                _mpCurSound.Play();
+            }
             int timerInterval = Math.Max(SnakeSpeedThreshold, (int)gameTickTimer.Interval.TotalMilliseconds - (currentScore * 2));
             gameTickTimer.Interval = TimeSpan.FromMilliseconds(timerInterval);
             var images = GameArea.Children.OfType<Image>().ToList();
@@ -467,8 +468,11 @@ namespace Snake
             var snekHeadRot = Rotate(snekHead2, snakeDirection);
             ImageBrush head = new ImageBrush(snekHeadRot);
             (snakeParts[snakeParts.Count - 2].UiElement as Rectangle).Fill = head;
-            _mpSound2.Position = TimeSpan.Zero;
-            _mpSound2.Play();
+            if (Sfx.sfxOn)
+            {
+                _mpSound2.Position = TimeSpan.Zero;
+                _mpSound2.Play();
+            }
             Tutorial.Visibility = Visibility.Visible;
             bool isNewHighscore = false;
             if (currentScore > 0)
