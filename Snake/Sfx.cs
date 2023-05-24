@@ -8,6 +8,6 @@ namespace Snake
 {
     internal class Sfx
     {
-        public bool sfxOn = true;
+        public static bool sfxOn = true;
     }
 }

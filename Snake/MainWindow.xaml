@@ -6,17 +6,29 @@
         xmlns:local="clr-namespace:Snake"
         mc:Ignorable="d" ResizeMode="NoResize" MouseDown="Window_MouseDown"
         Title="Snek" Height="580" Width="450" Icon="/Snek_icon.ico"
+        ContentRendered="Window_ContentRendered"
         WindowStyle="None">
+    <Window.Resources>
+    </Window.Resources>
     <Grid>
+        <DockPanel>
+            <Image Source="res/Title.png" HorizontalAlignment="Center" DockPanel.Dock="Top" Margin="50"></Image>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <Button Content="Play" Click="Button_Click" Width="100" Margin="10" Height="Auto" Padding="5" Foreground="#243020" Background="#feeeff" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="20"></Button>
+                <Button Click="Button_Click_1" Margin="10" Height="Auto" Padding="5" Width="100" Content="Exit" Foreground="#243020" Background="#feeeff" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="20"></Button>
+            </StackPanel>
+        </DockPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="bgm_btn" Content="BGM" Click="Button_Click_2" Grid.Column="1" VerticalAlignment="Bottom" Margin="15" Height="Auto" Padding="5" Width="60" Foreground="#243020" Background="#b6ff9d" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="20"></Button>
+            <Button Name="sfx_btn" Content="SFX" Click="Button_Click_3" Grid.Column="2" VerticalAlignment="Bottom" Margin="15" Height="Auto" Padding="5" Width="60" Foreground="#243020" Background="#b6ff9d" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="20"></Button>
+        </Grid>
         <Grid.Background>
             <ImageBrush ImageSource="res/back.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <StackPanel Orientation="Vertical">
-            <Image Source="res/Title.png" HorizontalAlignment="Center" Margin="50">  </Image>
-            <Button Content="weee" Click="Button_Click" Width="100"></Button>
-            <Button Content="bgm" Click="Button_Click_2"></Button>
-            <Button Click="Button_Click_1"> exit </Button>
-        </StackPanel>
-        
     </Grid>
 </Window>

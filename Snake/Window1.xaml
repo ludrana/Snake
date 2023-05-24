@@ -23,7 +23,6 @@
     <Grid>
         <DockPanel >
             <Grid DockPanel.Dock="Top" Name="pnlTitleBar" Background="#f0f5c5">
-                
                 <StackPanel Orientation="Vertical">
                     <DockPanel>
                         <WrapPanel Orientation="Horizontal" DockPanel.Dock="Left">
@@ -71,7 +70,7 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <Button Click="CloseHighscoreList" Width="Auto" Height="Auto" FontFamily="Comic Sans MS">Close</Button>
+                            <Button Click="CloseHighscoreList" Height="Auto" Margin="5" Padding="3" Width="100"  FontSize="22" FontFamily="Comic Sans MS" Foreground="#243020" Background="#feeeff">Close</Button>
                         </StackPanel>
                     </Border>
                     <Border BorderBrush=" #79ffce" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrNewHighscore" Panel.ZIndex="1" Visibility="Collapsed">
@@ -81,16 +80,16 @@
         Congratulations - you made it into the Snek highscore list! Please enter your name below...
                             </TextBlock>
                             <TextBox Name="txtPlayerName" FontSize="28" FontWeight="Bold" MaxLength="12" Margin="20" HorizontalContentAlignment="Center" FontFamily="Comic Sans MS" Foreground="#243020"></TextBox>
-                            <Button Name="btnAddToHighscoreList" FontSize="16" HorizontalAlignment="Center" Click="BtnAddToHighscoreList_Click" Padding="10,5" FontFamily="Comic Sans MS">Add to highscore list</Button>
+                            <Button Name="btnAddToHighscoreList" FontSize="16" HorizontalAlignment="Center" Click="BtnAddToHighscoreList_Click" Padding="10,5" Height="Auto" FontFamily="Comic Sans MS" Foreground="#243020" Background="#feeeff">Add to highscore list</Button>
                         </StackPanel>
                     </Border>
-                    <Border BorderBrush=" #79ffce" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrEndOfGame" Panel.ZIndex="1" Visibility="Visible">
+                    <Border BorderBrush=" #79ffce" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrEndOfGame" Panel.ZIndex="1" Visibility="Collapsed">
                         <StackPanel Orientation="Vertical" Background="#e7ffeb">
                             <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontFamily="Comic Sans MS" Margin="0,20,0,0">Oh no!</TextBlock>
                             <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" FontFamily="Comic Sans MS">...you died!</TextBlock>
                             <TextBlock Margin="20" TextAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#243020">Your score:</TextBlock>
-                            <TextBlock Name="tbFinalScore" TextAlignment="Center" FontSize="48" FontWeight="Bold" FontFamily="Comic Sans MS" Foreground="Maroon">0</TextBlock>
-                            <Button Click="CloseEndScreen" Width="Auto" Height="Auto" FontFamily="Comic Sans MS">Close</Button>
+                            <TextBlock Name="tbFinalScore" TextAlignment="Center" FontSize="44" FontWeight="Bold" FontFamily="Comic Sans MS" Foreground="Maroon">0</TextBlock>
+                            <Button Click="CloseEndScreen" Height="Auto"  Margin="5"  Padding="5" Width="100" FontFamily="Comic Sans MS" FontSize="22" Content="Close" Foreground="#243020" Background="#feeeff"></Button>
                         </StackPanel>
                     </Border>
                 </Canvas>

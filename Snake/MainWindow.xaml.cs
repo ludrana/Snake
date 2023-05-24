@@ -25,19 +25,16 @@ namespace Snake
         public MainWindow()
         {
             InitializeComponent();
-            _mpBgr = new MediaPlayer();
-            PlayBG();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // TODO : better transition
             Window1 mainWindow = new Window1();
             //ShowInTaskbar = false;
             mainWindow.Top = Top;
             mainWindow.Left = Left;
             mainWindow.Show();
-            Visibility = Visibility.Hidden;
+            Visibility = Visibility.Collapsed;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -77,17 +74,65 @@ namespace Snake
             {
                 StopBG();
                 isPlaying = false;
+                Color clr = (Color)ColorConverter.ConvertFromString("#ffa8a8");
+                SolidColorBrush bg = new SolidColorBrush(clr);
+                bgm_btn.Background = bg;
             }
             else
             {
                 PlayBG();
                 isPlaying= true;
+                Color clr = (Color)ColorConverter.ConvertFromString("#b6ff9d");
+                SolidColorBrush bg = new SolidColorBrush(clr);
+                bgm_btn.Background = bg;
             }
         }
 
-        private void Button_Click_3()
+        private void Button_Click_3(object sender, RoutedEventArgs e)
         {
+            Sfx.sfxOn = !Sfx.sfxOn;
+            if (Sfx.sfxOn)
+            {
+                Color clr = (Color)ColorConverter.ConvertFromString("#b6ff9d");
+                SolidColorBrush bg = new SolidColorBrush(clr);
+                sfx_btn.Background = bg;
+            }
+            else
+            {
+                Color clr = (Color)ColorConverter.ConvertFromString("#ffa8a8");
+                SolidColorBrush bg = new SolidColorBrush(clr);
+                sfx_btn.Background = bg;
+            }
+        }
 
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            _mpBgr = new MediaPlayer();
+            PlayBG();
+            if (!isPlaying)
+            {
+                Color clr = (Color)ColorConverter.ConvertFromString("#ffa8a8");
+                SolidColorBrush bg = new SolidColorBrush(clr);
+                bgm_btn.Background = bg;
+            }
+            else
+            {
+                Color clr = (Color)ColorConverter.ConvertFromString("#b6ff9d");
+                SolidColorBrush bg = new SolidColorBrush(clr);
+                bgm_btn.Background = bg;
+            }
+            if (Sfx.sfxOn)
+            {
+                Color clr = (Color)ColorConverter.ConvertFromString("#b6ff9d");
+                SolidColorBrush bg = new SolidColorBrush(clr);
+                sfx_btn.Background = bg;
+            }
+            else
+            {
+                Color clr = (Color)ColorConverter.ConvertFromString("#ffa8a8");
+                SolidColorBrush bg = new SolidColorBrush(clr);
+                sfx_btn.Background = bg;
+            }
         }
     }
 }
