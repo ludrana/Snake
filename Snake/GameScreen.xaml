@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
       xmlns:local="clr-namespace:Snake" Title="Snek"
-      mc:Ignorable="d" KeyUp="Window_KeyUp" Name="gameWindow"
+      mc:Ignorable="d" Name="gameWindow" 
       d:DesignHeight="580" d:DesignWidth="450"
       Loaded="Window_ContentRendered">
     <Page.Resources>

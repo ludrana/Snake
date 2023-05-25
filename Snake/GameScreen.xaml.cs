@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace Snake
@@ -32,7 +33,7 @@ namespace Snake
         private int tickNumber = 0;
         private Point foodPosition = new();
         private int currentScore = 0;
-        private bool gameStart = false;
+        public bool gameStart = false;
         private Random rnd = new Random();
         private Random rand = new Random();
         private MediaPlayer _mpCurSound;
@@ -47,7 +48,7 @@ namespace Snake
 
         private List<SnakePart> snakeParts = new List<SnakePart>();
         public enum SnakeDirection { Left, Right, Up, Down };
-        private SnakeDirection snakeDirection = SnakeDirection.Right;
+        public SnakeDirection snakeDirection = SnakeDirection.Right;
         private int snakeLength;
         public Page2()
         {
@@ -200,7 +201,7 @@ namespace Snake
             }
         }
 
-        private void MoveSnake()
+        public void MoveSnake()
         {
             // We'll add a new element to the snake, which will be the (new) head  
             // Therefore, we mark all existing parts as non-head (body) elements and then  
@@ -247,7 +248,7 @@ namespace Snake
             //DoCollisionCheck();          
         }
 
-        private void StartNewGame()
+        public void StartNewGame()
         {
             bdrHighscoreList.Visibility = Visibility.Collapsed;
             bdrEndOfGame.Visibility = Visibility.Collapsed;
@@ -317,78 +318,7 @@ namespace Snake
             Canvas.SetLeft(snakeFood, foodPosition.X);
         }
 
-        private void Window_KeyUp(object sender, KeyEventArgs e)
-        {
-            SnakeDirection originalSnakeDirection = snakeDirection;
-            if (bdrHighscoreList.IsVisible | bdrNewHighscore.IsVisible | bdrEndOfGame.IsVisible)
-            {
-                return;
-            }
-            switch (e.Key)
-            {
-                case Key.Up:
-                case Key.W:
-                    if (gameStart)
-                    {
-                        if (snakeDirection != SnakeDirection.Down)
-                            snakeDirection = SnakeDirection.Up;
-                    }
-                    else
-                    {
-                        snakeDirection = SnakeDirection.Up;
-                        gameStart = true;
-                        StartNewGame();
-                    }
-                    break;
-                case Key.Down:
-                case Key.S:
-                    if (gameStart)
-                    {
-                        if (snakeDirection != SnakeDirection.Up)
-                            snakeDirection = SnakeDirection.Down;
-                    }
-                    else
-                    {
-                        snakeDirection = SnakeDirection.Down;
-                        gameStart = true;
-                        StartNewGame();
-                    }
-                    break;
-                case Key.Left:
-                case Key.A:
-                    if (gameStart)
-                    {
-                        if (snakeDirection != SnakeDirection.Right)
-                            snakeDirection = SnakeDirection.Left;
-                    }
-                    else
-                    {
-                        snakeDirection = SnakeDirection.Left;
-                        gameStart = true;
-                        StartNewGame();
-                    }
-                    break;
-                case Key.Right:
-                case Key.D:
-                    if (gameStart)
-                    {
-                        if (snakeDirection != SnakeDirection.Left)
-                            snakeDirection = SnakeDirection.Right;
-                    }
-                    else
-                    {
-                        snakeDirection = SnakeDirection.Right;
-                        gameStart = true;
-                        StartNewGame();
-                    }
-                    break;
-                case Key.Escape:
-                    ((Window2)Application.Current.MainWindow).FrameContent.Navigate(new Page1());
-                    break;
-            }
-            if (snakeDirection != originalSnakeDirection)
-                MoveSnake();
-        }
+        
         private void DoCollisionCheck()
         {
             SnakePart snakeHead = snakeParts[snakeParts.Count - 1];
