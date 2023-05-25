@@ -16,26 +16,19 @@ using System.Windows.Shapes;
 namespace Snake
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Page1 : Page
     {
-        private MediaPlayer _mpBgr;
-        private bool isPlaying = true;
-        public MainWindow()
+        public Page1()
         {
             InitializeComponent();
-            _mpBgr = new MediaPlayer();
+            //((MainWindow)System.Windows.Application.Current.MainWindow).FunctionName(params);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window1 mainWindow = new Window1();
-            //ShowInTaskbar = false;
-            mainWindow.Top = Top;
-            mainWindow.Left = Left;
-            mainWindow.Show();
-            Visibility = Visibility.Collapsed;
+            ((Window2)Application.Current.MainWindow).FrameContent.Navigate(new Page2());
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -43,46 +36,22 @@ namespace Snake
             Application.Current.Shutdown();
         }
 
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                DragMove();
-            }
-            catch { }
-        }
-
-        private void PlayBG()
-        {
-            _mpBgr.Open(new Uri(@"res/SugarHaze.mp3", UriKind.Relative));
-            _mpBgr.Play();
-            _mpBgr.MediaEnded += new EventHandler(BGEnded);
-        }
-        private void BGEnded(object sender, EventArgs e)
-        {
-            _mpBgr.Position = TimeSpan.Zero;
-            _mpBgr.Play();
-        }
-
-        private void StopBG()
-        {
-            _mpBgr.Stop();
-        }
+        
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (isPlaying)
+            if (((Window2)Application.Current.MainWindow).isPlaying)
             {
-                StopBG();
-                isPlaying = false;
+                ((Window2)Application.Current.MainWindow).StopBG();
+                ((Window2)Application.Current.MainWindow).isPlaying = false;
                 Color clr = (Color)ColorConverter.ConvertFromString("#ffa8a8");
                 SolidColorBrush bg = new SolidColorBrush(clr);
                 bgm_btn.Background = bg;
             }
             else
             {
-                PlayBG();
-                isPlaying= true;
+                ((Window2)Application.Current.MainWindow).PlayBG();
+                ((Window2)Application.Current.MainWindow).isPlaying = true;
                 Color clr = (Color)ColorConverter.ConvertFromString("#b6ff9d");
                 SolidColorBrush bg = new SolidColorBrush(clr);
                 bgm_btn.Background = bg;
@@ -106,11 +75,9 @@ namespace Snake
             }
         }
 
-        private void Window_ContentRendered(object sender, EventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            _mpBgr = new MediaPlayer();
-            PlayBG();
-            if (!isPlaying)
+            if (!((Window2)Application.Current.MainWindow).isPlaying)
             {
                 Color clr = (Color)ColorConverter.ConvertFromString("#ffa8a8");
                 SolidColorBrush bg = new SolidColorBrush(clr);

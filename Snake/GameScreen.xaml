@@ -1,0 +1,97 @@
+﻿<Page x:Class="Snake.Page2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+      xmlns:local="clr-namespace:Snake" Title="Snek"
+      mc:Ignorable="d" KeyUp="Window_KeyUp" Name="gameWindow"
+      d:DesignHeight="580" d:DesignWidth="450"
+      Loaded="Window_ContentRendered">
+    <Page.Resources>
+        <CollectionViewSource Source="{Binding ElementName=gameWindow, Path=HighscoreList}" x:Key="HighScoreListViewSource">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription Direction="Descending" PropertyName="Score" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </Page.Resources>
+    <Grid>
+        <DockPanel >
+            <Grid DockPanel.Dock="Top" Name="pnlTitleBar" Background="#f0f5c5">
+                <StackPanel Orientation="Vertical">
+                    <DockPanel>
+                        <WrapPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                            <Image Source="res/apple.png" Width="30" Margin="10"></Image>
+                            <TextBlock Name="statusScore" Margin="10" VerticalAlignment="Center" Foreground=" #5a480b " FontSize="24" FontWeight="Bold" FontFamily="Comic Sans MS">0</TextBlock>
+                        </WrapPanel>
+                        <WrapPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Image Source="res/cup.png" Width="30" Margin="10"></Image>
+                            <TextBlock VerticalAlignment="Center" Name="statusSpeed" Margin="10" Foreground=" #5a480b " FontSize="24" FontWeight="Bold" FontFamily="Comic Sans MS">0</TextBlock>
+                        </WrapPanel>
+                    </DockPanel>
+                    <StackPanel Orientation="Vertical" Name="Tutorial" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock VerticalAlignment="Center" FontSize="22" Foreground=" #5a480b " FontFamily="Comic Sans MS">Press</TextBlock>
+                            <Image Source="res/arrows.png" Width="80" Height="60"></Image>
+                            <TextBlock VerticalAlignment="Center" FontSize="22" Foreground=" #5a480b " FontFamily="Comic Sans MS"> or</TextBlock>
+                            <Image Source="res/wasd.png"  Width="80" Height="60"></Image>
+                            <TextBlock VerticalAlignment="Center" FontSize="22" Foreground=" #5a480b " FontFamily="Comic Sans MS"> to move</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock VerticalAlignment="Center" Foreground=" #5a480b " FontSize="22" FontFamily="Comic Sans MS">Press</TextBlock>
+                            <Image Source="res/esc.png" Width="30" Height="30" Margin="10"></Image>
+                            <TextBlock VerticalAlignment="Center" Foreground=" #5a480b " FontSize="22" FontFamily="Comic Sans MS">  to exit</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+
+
+            </Grid>
+            <Border BorderBrush=" #057317 " BorderThickness="3" Width="406" Height="406" VerticalAlignment="Bottom" Margin="5">
+                <Canvas Name="GameArea" HorizontalAlignment="Center" Width="400" Height="400">
+                    <Border BorderBrush=" #79ffce" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrHighscoreList" Panel.ZIndex="1" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical" Background="#e7ffeb">
+                            <Border BorderThickness="0,0,0,2" BorderBrush=" #79ffce" Margin="0,10">
+                                <TextBlock HorizontalAlignment="Center" FontSize="34" FontWeight="Bold" FontFamily="Comic Sans MS" Foreground="#066900 ">High Score List</TextBlock>
+                            </Border>
+                            <ItemsControl ItemsSource="{Binding Source={StaticResource HighScoreListViewSource}}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <DockPanel Margin="5">
+                                            <TextBlock Text="{Binding PlayerName}" DockPanel.Dock="Left" FontSize="18" Foreground="#243020" FontFamily="Comic Sans MS"></TextBlock>
+                                            <TextBlock Text="{Binding Score}" DockPanel.Dock="Right" FontSize="18" Foreground="#243020" HorizontalAlignment="Right" FontFamily="Comic Sans MS"></TextBlock>
+                                        </DockPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Button Click="CloseHighscoreList" Height="Auto" Margin="5" Padding="3" Width="100"  FontSize="22" FontFamily="Comic Sans MS" Foreground="#243020" Background="#feeeff">Close</Button>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderBrush=" #79ffce" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrNewHighscore" Panel.ZIndex="1" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical" Background="#e7ffeb">
+                            <TextBlock HorizontalAlignment="Center" FontSize="34" FontWeight="Bold" Margin="20" FontFamily="Comic Sans MS" Foreground="#066900">New Highscore!</TextBlock>
+                            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="16" FontFamily="Comic Sans MS" Foreground="#243020">  
+        Congratulations - you made it into the Snek highscore list! Please enter your name below...
+                            </TextBlock>
+                            <TextBox Name="txtPlayerName" FontSize="28" FontWeight="Bold" MaxLength="12" Margin="20" HorizontalContentAlignment="Center" FontFamily="Comic Sans MS" Foreground="#243020"></TextBox>
+                            <Button Name="btnAddToHighscoreList" FontSize="16" HorizontalAlignment="Center" Click="BtnAddToHighscoreList_Click" Padding="10,5" Height="Auto" FontFamily="Comic Sans MS" Foreground="#243020" Background="#feeeff">Add to highscore list</Button>
+                        </StackPanel>
+                    </Border>
+                    <Border BorderBrush=" #79ffce" BorderThickness="2" Width="300" Height="300" Canvas.Left="50" Canvas.Top="50" Name="bdrEndOfGame" Panel.ZIndex="1" Visibility="Collapsed">
+                        <StackPanel Orientation="Vertical" Background="#e7ffeb">
+                            <TextBlock HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" FontFamily="Comic Sans MS" Margin="0,20,0,0">Oh no!</TextBlock>
+                            <TextBlock HorizontalAlignment="Center" FontSize="26" FontWeight="Bold" FontFamily="Comic Sans MS">...you died!</TextBlock>
+                            <TextBlock Margin="20" TextAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#243020">Your score:</TextBlock>
+                            <TextBlock Name="tbFinalScore" TextAlignment="Center" FontSize="44" FontWeight="Bold" FontFamily="Comic Sans MS" Foreground="Maroon">0</TextBlock>
+                            <Button Click="CloseEndScreen" Height="Auto"  Margin="5"  Padding="5" Width="100" FontFamily="Comic Sans MS" FontSize="22" Content="Close" Foreground="#243020" Background="#feeeff"></Button>
+                        </StackPanel>
+                    </Border>
+                </Canvas>
+            </Border>
+        </DockPanel>
+        <Grid.Background>
+            <ImageBrush ImageSource="res/back.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+    </Grid>
+</Page>
