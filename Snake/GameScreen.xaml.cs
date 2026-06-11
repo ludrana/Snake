@@ -173,19 +173,16 @@ namespace Snake
             }
             foreach (SnakePart snakePart in snakeParts)
             {
-                if (snakePart.UiElement != null && !snakePart.IsHead && !snakePart.IsTail)
+                if (snakePart.UiElement != null)
                 {
-                    (snakePart.UiElement as Rectangle).Fill = snakeBodyBrush;
+                    if (!snakePart.IsHead && !snakePart.IsTail)
+                        snakePart.UiElement.Fill = snakeBodyBrush;
+                    else if (snakePart.IsHead)
+                        snakePart.UiElement.Fill = head;
+                    else if (snakePart.IsTail)
+                        snakePart.UiElement.Fill = tail;
                 }
-                else if (snakePart.UiElement != null && snakePart.IsHead)
-                {
-                    (snakePart.UiElement as Rectangle).Fill = head;
-                }
-                else if (snakePart.UiElement != null && snakePart.IsTail)
-                {
-                    (snakePart.UiElement as Rectangle).Fill = tail;
-                }
-                if (snakePart.UiElement == null)
+                else
                 {
                     snakePart.UiElement = new Rectangle()
                     {
