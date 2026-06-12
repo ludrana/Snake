@@ -1,0 +1,47 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="DisabledBtnBorderColor">#CCCCCC</SolidColorBrush>
+    <SolidColorBrush x:Key="DisabledBtnForeground">#888888</SolidColorBrush>
+    <Cursor x:Key="DisabledBtnBorderCursor">Arrow</Cursor>
+
+    <!-- Базовый стиль для закругленных кнопок -->
+    <Style x:Key="RoundedButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"
+                            CornerRadius="12" 
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Effect="{TemplateBinding Effect}">
+                        <ContentPresenter x:Name="contentPresenter"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!-- Отключённое состояние -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource DisabledBtnBorderColor}"/>
+                            <Setter Property="Foreground" Value="{StaticResource DisabledBtnForeground}"/>
+                            <Setter Property="Cursor" Value="{StaticResource DisabledBtnBorderCursor}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Красивый стиль кнопки (применяется по умолчанию) -->
+    <Style TargetType="Button" BasedOn="{StaticResource RoundedButton}">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Padding" Value="20,0,20,0"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect BlurRadius="6" ShadowDepth="2" Opacity="0.3" Color="Black"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
