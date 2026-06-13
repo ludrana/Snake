@@ -442,7 +442,7 @@ namespace Snake
 			// Create & insert the new entry
 			this.HighscoreList.Insert(newIndex, new SnakeHighscore()
 			{
-				PlayerName = txtPlayerName.Text,
+				PlayerName = playerName,
 				Score = currentScore
 			});
 			// Make sure that the amount of entries does not exceed the maximum
