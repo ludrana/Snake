@@ -426,6 +426,11 @@ namespace Snake
 		}
 		private void BtnAddToHighscoreList_Click(object sender, RoutedEventArgs e)
 		{
+			var playerName = txtPlayerName.Text.Trim();
+
+			if (string.IsNullOrEmpty(playerName))
+				return;
+
 			int newIndex = 0;
 			// Where should the new entry be inserted?
 			if ((this.HighscoreList.Count > 0) && (currentScore < this.HighscoreList.Max(x => x.Score)))
